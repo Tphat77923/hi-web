@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Quản Lý Giáo Dục - TP.HCM</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Hệ Thống Quản Lý Giáo Dục</h1>
+            <p class="subtitle">Thông tin trường đại học và điểm số học sinh</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('universities')">
+                📚 Danh Sách Trường
+            </button>
+            <button class="tab-button" onclick="switchTab('grades')">
+                📊 Bảng Điểm
+            </button>
+        </div>
+
+        <div id="universities" class="tab-content active">
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="icon">🎓</span>
+                    <h2>Danh Sách Trường Đại Học Tại TP. Hồ Chí Minh</h2>
+                </div>
+                <p>Khám phá các trường đại học hàng đầu và ngành học phổ biến</p>
+            </div>
+
+            <div class="universities-grid" id="universitiesGrid">
+                <!-- Universities will be rendered here by JavaScript -->
+            </div>
+        </div>
+
+        <div id="grades" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <div class="section-title">
+                        <span class="icon">📋</span>
+                        <h2>Bảng Điểm Học Sinh</h2>
+                    </div>
+                    <p class="card-description">Kết quả học tập học kỳ I - Năm học 2024-2025</p>
+                </div>
+
+                <div class="table-container">
+                    <table class="grades-table">
+                        <thead>
+                            <tr>
+                                <th>STT</th>
+                                <th>Họ và Tên</th>
+                                <th class="text-center">Toán</th>
+                                <th class="text-center">Văn</th>
+                                <th class="text-center">Anh</th>
+                                <th class="text-center">Lý</th>
+                                <th class="text-center">Hóa</th>
+                                <th class="text-center">TB</th>
+                                <th class="text-center">Xếp loại</th>
+                            </tr>
+                        </thead>
+                        <tbody id="gradesTableBody">
+                            <!-- Grades will be rendered here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="statistics" id="statistics">
+                    <!-- Statistics will be rendered here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
