@@ -9,8 +9,8 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1>Hệ Thống Quản Lý Giáo Dục</h1>
-            <p class="subtitle">Thông tin trường đại học và điểm số học sinh</p>
+            <h1>Tra Cứu Các Trường Đại Học</h1>
+            <p class="subtitle">Thông tin trường đại học và điểm chuẩn tuyển sinh</p>
         </header>
 
         <div class="tabs">
@@ -26,7 +26,7 @@
             <div class="section-header">
                 <div class="section-title">
                     <span class="icon">🎓</span>
-                    <h2>Danh Sách Trường Đại Học Tại TP. Hồ Chí Minh</h2>
+                    <h2>Tra Cứu Các Trường Đại Học Tại TP. Hồ Chí Minh</h2>
                 </div>
                 <p>Khám phá các trường đại học hàng đầu và ngành học phổ biến</p>
             </div>
@@ -36,39 +36,23 @@
             </div>
         </div>
 
-        <div id="grades" class="tab-content">
+        <div id="benchmarks" class="tab-content">
             <div class="card">
                 <div class="card-header">
                     <div class="section-title">
-                        <span class="icon">📋</span>
-                        <h2>Bảng Điểm Học Sinh</h2>
+                        <span class="icon">📊</span>
+                        <h2 id="benchmarkTitle">Điểm Chuẩn Các Trường Đại Học</h2>
                     </div>
-                    <p class="card-description">Kết quả học tập học kỳ I - Năm học 2024-2025</p>
+                    <p class="card-description" id="benchmarkDescription">Xem điểm chuẩn của các trường đại học tại TP.HCM</p>
+                    <div id="backButton" style="display: none; margin-top: 1rem;">
+                        <button class="back-btn" onclick="showAllBenchmarks()">
+                            ← Quay lại danh sách tất cả trường
+                        </button>
+                    </div>
                 </div>
 
-                <div class="table-container">
-                    <table class="grades-table">
-                        <thead>
-                            <tr>
-                                <th>STT</th>
-                                <th>Họ và Tên</th>
-                                <th class="text-center">Toán</th>
-                                <th class="text-center">Văn</th>
-                                <th class="text-center">Anh</th>
-                                <th class="text-center">Lý</th>
-                                <th class="text-center">Hóa</th>
-                                <th class="text-center">TB</th>
-                                <th class="text-center">Xếp loại</th>
-                            </tr>
-                        </thead>
-                        <tbody id="gradesTableBody">
-                            <!-- Grades will be rendered here by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="statistics" id="statistics">
-                    <!-- Statistics will be rendered here by JavaScript -->
+                <div id="benchmarkContent">
+                    <!-- Benchmark content will be rendered here by JavaScript -->
                 </div>
             </div>
         </div>
