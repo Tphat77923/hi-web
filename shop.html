@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Nước Giải Khát Online</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fffe;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #32a852;
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            background-color: #e8f5f0;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1.25rem;
+        }
+
+        .product-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #32a852;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: #32a852;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background-color: #8fd4b8;
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 16px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #32a852;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .form-actions button {
+            flex: 1;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #32a852;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .tracking-box {
+            background-color: #e8f5f0;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .tracking-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tracking-number {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #32a852;
+            letter-spacing: 2px;
+        }
+
+        footer {
+            background-color: #32a852;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+
+            .product-image {
+                height: 150px;
+                font-size: 3rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>🍹 Menu Nước Giải Khát</h1>
+        <p>Thức uống tươi mát, giao hàng tận nơi</p>
+    </header>
+
+    <!-- Products Grid -->
+    <div class="container">
+        <div class="products-grid" id="productsGrid"></div>
+    </div>
+
+    <!-- Order Form Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Đặt hàng</h2>
+                <p>Vui lòng điền thông tin giao hàng của bạn</p>
+            </div>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="customerName">Họ và tên *</label>
+                    <input type="text" id="customerName" required placeholder="Nhập họ và tên">
+                </div>
+                <div class="form-group">
+                    <label for="customerAddress">Địa chỉ *</label>
+                    <input type="text" id="customerAddress" required placeholder="Nhập địa chỉ giao hàng">
+                </div>
+                <div class="form-group">
+                    <label for="customerContact">Số điện thoại hoặc Email *</label>
+                    <input type="text" id="customerContact" required placeholder="Nhập SĐT hoặc email">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeOrderModal()">Hủy</button>
+                    <button type="submit" class="btn">Gửi đơn hàng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="success-icon">✓</div>
+            <div class="modal-header" style="text-align: center;">
+                <h2>Đặt hàng thành công!</h2>
+                <p>Cảm ơn bạn đã đặt hàng. Đơn hàng của bạn đang được xử lý.</p>
+            </div>
+            <div class="tracking-box">
+                <div class="tracking-label">Mã vận chuyển của bạn:</div>
+                <div class="tracking-number" id="trackingNumber"></div>
+            </div>
+            <button type="button" class="btn" onclick="closeSuccessModal()">Đóng</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© tphat - 2025 Menu Nước Giải Khát - Giao hàng nhanh chóng</p>
+    </footer>
+
+    <script>
+        // Products data
+        const products = [
+            { id: 1, name: "Trà Sữa Trân Châu", price: "35.000đ", image: "pic/milktea.jpg" },
+            { id: 2, name: "Cà Phê Sữa Đá", price: "25.000đ", image: "pic/milkcoffee.jpg" },
+            { id: 3, name: "Sinh Tố Bơ", price: "40.000đ", image: "pic/avocadosmoothie.jpg" },
+            { id: 4, name: "Nước Ép Cam", price: "30.000đ", image: "pic/orangejuice.jpg" },
+            { id: 5, name: "Trà Đào Cam Sả", price: "38.000đ", image: "pic/peachtea.png" },
+            { id: 6, name: "Soda Chanh Dây", price: "32.000đ", image: "pic/sodachanhday.jpg" },
+            { id: 7, name: "Matcha Latte", price: "42.000đ", image: "pic/matchalatte.jpg" },
+            { id: 8, name: "Nước Dừa Tươi", price: "28.000đ", image: "pic/coconutwater.jpg" },
+        ];
+
+        let selectedProduct = null;
+
+        // Render products
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <div class="product-image"><img src="${product.image}" alt="${product.name}"></div>
+                    <div class="product-info">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-price">${product.price}</div>
+                        <button class="btn" onclick="openOrderModal(${product.id})">
+                            🛒 Mua hàng
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Open order modal
+        function openOrderModal(productId) {
+            selectedProduct = products.find(p => p.id === productId);
+            document.getElementById('modalTitle').textContent = `Đặt hàng: ${selectedProduct.name}`;
+            document.getElementById('orderModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close order modal
+        function closeOrderModal() {
+            document.getElementById('orderModal').classList.remove('active');
+            document.getElementById('orderForm').reset();
+            document.body.style.overflow = 'auto';
+        }
+
+        // Generate tracking number
+        function generateTrackingNumber() {
+            const randomNum = Math.floor(10000 + Math.random() * 90000);
+            return `SHIP${randomNum}`;
+        }
+
+        // Handle form submission
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Generate tracking number
+            const trackingNumber = generateTrackingNumber();
+            document.getElementById('trackingNumber').textContent = trackingNumber;
+            
+            // Close order modal
+            closeOrderModal();
+            
+            // Show success modal
+            document.getElementById('successModal').classList.add('active');
+        });
+
+        // Close success modal
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            selectedProduct = null;
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                if (e.target.id === 'orderModal') {
+                    closeOrderModal();
+                } else if (e.target.id === 'successModal') {
+                    closeSuccessModal();
+                }
+            }
+        });
+
+        // Initialize
+        renderProducts();
+    </script>
+</body>
+</html>
